@@ -3295,7 +3295,6 @@ stock UpdateRestaurantBizLabel(restid, const owner[] = "None", const shopname[] 
 stock UpdateRestaurantFoodName(restid, foodtype, const name[])
 {
 	new
-		label[400],
 		fh[200];
 	format(fh,sizeof(fh),BIZ_RESTAURANT,restid);
 	if(!fexist(fh)) return 0;
@@ -6793,7 +6792,6 @@ public OnPlayerUpdate(playerid)
 {
 	new vitd[128];
 	new id;
-	new pkeys[3];
 	new bool:ispv;
 	foreach(new i : Player) {
 		if(GetPlayerVehicleID(playerid) == pVehicle[i][ID]) {
@@ -13467,7 +13465,6 @@ CMD:e(playerid, params[]) return cmd_engine(playerid, params);
 CMD:engine(playerid, params[])
 {
 	new
-		msg[128],
 		vehicleid = GetPlayerVehicleID(playerid),
 		engine,
 		lights,
@@ -13497,9 +13494,7 @@ CMD:engine(playerid, params[])
 		if(IsPlayerInVehicle(playerid, pVehicle[playerid][ID]) && pVehicle[playerid][Fuel] <= 0.0) return SendClientMessage(playerid, -1, "ERROR: Out of Fuel!");
 		if(IsPlayerInVehicle(playerid, pVehicle[playerid][ID]) && pVehicle[playerid][Battery] <= 0.0) return SendClientMessage(playerid, -1, "ERROR: Battery is Dead!");
 		SetVehicleParamsEx(vehicleid, 1, lights, alarm, doors, bonnet, boot, objective);
-		//format(msg,sizeof(msg),"{D6A4D9}* %s starts the vehicle engine", RetPname(playerid,1));
 		cmd_me(playerid, "starts the vehicle engine");
-		//ProxMsg(30.0,playerid,msg,-1);
 		return 1;
 	}
 	if(engine == 1) {
