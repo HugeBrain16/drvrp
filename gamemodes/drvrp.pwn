@@ -2637,7 +2637,7 @@ stock GetPlayerDistanceFromPlayer(playerid, playerid2, &Float:distance)
 	else return 0;
 }
 
-stock ApplyPlayerAnimation(playerid, animlib[], animname[], Float:fDelta, loop, lockx, locky, freeze, time, forcesync = 0)
+stock ApplyPlayerAnimation(playerid, const animlib[], const animname[], Float:fDelta, loop, lockx, locky, freeze, time, forcesync = 0)
 {
     ApplyAnimation(playerid, animlib, "null", fDelta, loop, lockx, locky, freeze, time, forcesync); // Pre-load animation library
     return ApplyAnimation(playerid, animlib, animname, fDelta, loop, lockx, locky, freeze, time, forcesync);
@@ -2655,7 +2655,7 @@ stock RetPname(playerid, und = 0)
 	return pname;
 }
 
-stock ProxMsg(Float:radius, playerid, string[], color)
+stock ProxMsg(Float:radius, playerid, const string[], color)
 {
     new Float:x, Float:y, Float:z;
     GetPlayerPos(playerid, x, y, z);
@@ -2669,7 +2669,7 @@ stock ProxMsg(Float:radius, playerid, string[], color)
     return 1;
 }
 
-stock ProxMsg2(Float:radius, playerid, string[], color1, color2, color3, color4)
+stock ProxMsg2(Float:radius, playerid, const string[], color1, color2, color3, color4)
 {
 	new
 		Float:playerPos[3],
@@ -3088,7 +3088,7 @@ stock SaveAdLog()
 	return 1;
 }
 
-stock AdLogger(text[])
+stock AdLogger(const text[])
 {
 	for(new i; i < 60; i++)
 	{
