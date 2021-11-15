@@ -216,6 +216,7 @@
 
 /* pragmas */
 #pragma unused ret_memcpy
+#pragma warning disable 239, 213
 
 /* Player Variables and Their Enumeration */
 
