@@ -2645,7 +2645,7 @@ stock ApplyPlayerAnimation(playerid, const animlib[], const animname[], Float:fD
 
 stock RetPname(playerid, und = 0)
 {
-	new pname[100];
+	new pname[MAX_PLAYER_NAME];
 	if(!IsPlayerConnected(playerid)) return pname;
 	GetPlayerName(playerid, pname, sizeof(pname));
 	if(und == 1) for(new i; i < strlen(pname); i++)
@@ -8073,7 +8073,7 @@ CMD:rconweapon(playerid, params[])
 
 CMD:id(playerid, params[])
 {
-	new key[80];
+	new key[MAX_PLAYER_NAME];
 	new fmt_d[200];
 	new bool:found[MAX_PLAYERS];
 	new bool:foundid;
@@ -11812,7 +11812,7 @@ CMD:lockrv(playerid, params[])
 
 CMD:setprice(playerid, params[])
 {
-	new str[800];
+	new str[256];
 	for(new i; i < MAX_ELECTRONIC; i++) {
 		if(IsPlayerInRangeOfPoint(playerid,1.5,bizElectronic[i][EnterX],bizElectronic[i][EnterY],bizElectronic[i][EnterZ])) {
 			if(!strcmp(bizElectronic[i][Owner],RetPname(playerid),false)) {
@@ -11867,7 +11867,7 @@ CMD:setskin(playerid, params[])
 CMD:rentveh(playerid, params[])
 {
 	new
-		numplate[240];
+		numplate[128];
 	if(IsPlayerInRangeOfPoint(playerid,1.5,1562.2598,-2300.6880,13.5650)) {
 		for(new i; i < MAX_RENTVEH_FAGGIO; i++)
 		{
@@ -11968,8 +11968,8 @@ CMD:boombox(playerid, params[])
 	new
 		Float:pos[4],
 		Float:Objpos[3],
-		label[300],
-		opt[40];
+		label[20 + MAX_PLAYER_NAME],
+		opt[6];
 	if(!pInventory[playerid][Boombox]) return SendClientMessage(playerid, -1, "ERROR: You don't have a boombox");
 	if(sscanf(params,"s[40]", opt)) return SendClientMessage(playerid, -1, "Usage: /boombox [place | pickup | set]");
 
@@ -12031,7 +12031,7 @@ CMD:boombox(playerid, params[])
 
 CMD:restockbiz(playerid, params[])
 {
-	new str[800];
+	new str[256];
 	for(new i; i < MAX_ELECTRONIC; i++) {
 		if(IsPlayerInRangeOfPoint(playerid,1.5,bizElectronic[i][EnterX],bizElectronic[i][EnterY],bizElectronic[i][EnterZ])) {
 			if(!strcmp(bizElectronic[i][Owner],RetPname(playerid),false)) {
@@ -12453,8 +12453,8 @@ CMD:buybiz(playerid, params[])
 
 CMD:phone(playerid, params[])
 {
-	new str[800];
-	new fstr[800];
+	new str[512];
+	new fstr[512];
 	strcat(str,"SMS Inbox\n");
 	strcat(str,"Advertisement Logs\n");
 	strcat(str,"Advertisement\n");
@@ -12478,7 +12478,7 @@ CMD:getint(playerid, params[])
 
 CMD:getvw(playerid, params[])
 {
-	new msg[80];
+	new msg[64];
 	format(msg,sizeof(msg),"Virtual World: %d",GetPlayerVirtualWorld(playerid));
 	SendClientMessage(playerid,-1,msg);
 	return 1;
@@ -12539,7 +12539,7 @@ CMD:buy(playerid, params[])
 {
 	new
 		str_f[1200],
-		str[800];
+		str[512];
 	for(new i; i < MAX_ELECTRONIC; i++)
 	{
 		if(GetPlayerVirtualWorld(playerid) == bizElectronic[i][WorldID]) {
@@ -12685,7 +12685,7 @@ CMD:clearanim(playerid, params[])
 CMD:sfps(playerid, params[])
 {
 	new
-		msg[80];
+		msg[64];
 	if(!IsPlayerAdmin(playerid)) return 0;
 	format(msg,sizeof(msg),"Server Tick Rate: %d", GetServerTickRate());
 	SendClientMessage(playerid, -1, msg);
@@ -12727,7 +12727,7 @@ CMD:ado(playerid, params[])
 CMD:ame(playerid, params[])
 {
 	new
-		msg[400],
+		msg[11 + MAX_PLAYER_NAME + 80],
 		text[80];
 	if(sscanf(params, "s[80]", text)) return SendClientMessage(playerid, -1, "Usage: /ame [text]");
 
@@ -13081,7 +13081,7 @@ CMD:reply(playerid, params[])
 		d,
 		mo,
 		y,
-		pmlog[2000];
+		pmlog[1024];
 	if(GetPVarInt(playerid, "PreviousPM") == -1) return SendClientMessage(playerid,-1,"ERROR: You haven't received any PM yet");
 	if(sscanf(params, "s[200]", text)) return SendClientMessage(playerid, -1, "Usage: /r(eply) [text]");
 	if(!IsPlayerConnected(GetPVarInt(playerid, "PreviousPM"))) return SendClientMessage(playerid, -1, "ERROR: Player Is Not Connected!");
@@ -13115,7 +13115,7 @@ CMD:pm(playerid, params[])
 		d,
 		mo,
 		y,
-		pmlog[2000];
+		pmlog[1024];
 	if(sscanf(params, "is[200]", idx, text)) return SendClientMessage(playerid, -1, "Usage: /pm [id] [text]");
 	if(!IsPlayerConnected(idx)) return SendClientMessage(playerid, -1, "ERROR: Player Is Not Connected!");
 	format(msg,sizeof(msg),"{FFFF00}(( PM From %s: %s ))", RetPname(playerid), text);
@@ -13267,7 +13267,7 @@ CMD:info(playerid, params[])
 CMD:resetpmoney(playerid, params[])
 {
     new
-    	msg[128],
+    	msg[81 + MAX_PLAYER_NAME],
         idx;
     if(!IsPlayerAdmin(playerid)) return 0;
     if(sscanf(params, "i", idx)) return SendClientMessage(playerid, -1,"Usage: /resetpmoney [id]");
