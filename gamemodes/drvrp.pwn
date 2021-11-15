@@ -268,10 +268,10 @@ new pTaxiCall[MAX_PLAYERS][E_TAXICALL];
 
 enum E_POS
 {
-	bool:pX,
-	bool:pY,
-	bool:pZ,
-	bool:pRot,
+	Float:pX,
+	Float:pY,
+	Float:pZ,
+	Float:pRot,
 	InteriorID,
 	WorldID,
 	SkinID
